@@ -222,12 +222,35 @@ class _LogSymptomsScreenState extends State<LogSymptomsScreen> {
               }).toList(),
               SizedBox(height: 20),
               Center(
-                child: ElevatedButton(
-                  onPressed: _saveSymptoms,
-                  child: Text('Save Symptoms'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: AppColors.primaryColor1,
+                child: InkWell(
+                  onTap: _saveSymptoms,
+                  child: Container(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: AppColors.primaryG,
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight),
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 2,
+                            offset: Offset(0, 2))
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Save Symptoms",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.whiteColor,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

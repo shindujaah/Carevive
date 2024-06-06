@@ -108,13 +108,13 @@ class _DateSpecificSymptomsState extends State<DateSpecificSymptoms> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              if (symptom['severity'] == "None")
+                              if (symptom['severity'] == "Severe")
                                 Icon(Icons.sentiment_very_dissatisfied,
                                     color: Colors.red),
-                              if (symptom['severity'] == "Mild")
+                              if (symptom['severity'] == "Moderate")
                                 Icon(Icons.sentiment_dissatisfied,
                                     color: Colors.orange),
-                              if (symptom['severity'] == "Moderate")
+                              if (symptom['severity'] == "Mild")
                                 Icon(Icons.sentiment_neutral,
                                     color: Colors.blue),
                               if (symptom['severity'] == "Good")

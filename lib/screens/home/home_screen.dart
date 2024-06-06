@@ -24,7 +24,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // late Stream<StepCount> _stepCountStream;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   User? user;
@@ -102,18 +101,15 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context) => LogSymptomsScreen(
         selectedDay: _selectedDay,
       ),
-    ).then((_) =>
-        _fetchLoggedDates()); // Refresh the calendar after logging symptoms
+    ).then((_) => _fetchLoggedDates());
   }
 
   Future<void> fetchUserData() async {
     int retries = 3;
     while (retries > 0) {
       try {
-        // Get the current user
         user = _auth.currentUser;
         if (user != null) {
-          // Get user details
           uid = user!.uid;
           DocumentSnapshot userSnapshot =
               await _firestore.collection('users').doc(uid).get();
@@ -127,10 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         }
 
-        return; // Operation succeeded
+        return;
       } catch (e) {
         retries--;
-        await Future.delayed(Duration(seconds: 5)); // Retry after 5 seconds
+        await Future.delayed(Duration(seconds: 5));
       }
     }
   }
@@ -178,68 +174,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: media.width * 0.05,
                   ),
-                  Container(
-                    height: media.height * 0.2,
-                    width: media.width,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xFFFAF0DB),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Temperature",
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.8),
-                                fontSize: 18,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "35.5",
-                              style: TextStyle(
-                                color: AppColors.blackColor,
-                                fontSize: 35,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 30),
-                          child: Image.asset(
-                            "assets/icons/temp.png",
-                            height: media.height * 0.1,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: media.width * 0.03,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         height: media.height * 0.17,
-                        width: media.width / 2.4,
+                        width: media.width / 2.5,
                         padding: EdgeInsets.symmetric(horizontal: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: Color(0xFFF5E1E9),
+                          color:Color.fromARGB(255, 245, 245, 245),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image.asset(
                               "assets/icons/blood_icon.png",
@@ -248,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              "Blood",
+                              "Blood Group",
                               style: TextStyle(
                                 color: Colors.black.withOpacity(0.8),
                                 fontSize: 16,
@@ -271,15 +227,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Container(
                         height: media.height * 0.17,
-                        width: media.width / 2.4,
+                        width: media.width / 2.5,
                         padding: EdgeInsets.symmetric(horizontal: 25),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: Color(0xFFDCEDF9),
+                          color:Color.fromARGB(255, 245, 245, 245),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image.asset(
                               "assets/icons/weight_icon.png",
@@ -297,13 +261,26 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             SizedBox(height: 5),
-                            Text(
-                              weight.toString(),
-                              style: TextStyle(
-                                color: AppColors.blackColor,
-                                fontSize: 30,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w500,
+                            RichText(
+                              text: TextSpan(
+                                text: '$weight', // Weight value
+                                style: TextStyle(
+                                  color: AppColors.blackColor,
+                                  fontSize: 30,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: ' kg', // 'kg' text
+                                    style: TextStyle(
+                                      color: AppColors.blackColor,
+                                      fontSize: 20, // Smaller font size for 'kg'
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -313,27 +290,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(
                     height: media.width * 0.05,
-                  ),
-                  Center(
-                    child: ElevatedButton.icon(
-                      icon: Icon(Icons.history),
-                      label: Text('View Symptom History'),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor1,
-                          foregroundColor: Colors.white),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SymptomHistory(userId: _auth.currentUser!.uid),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: media.width * 0.03,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -450,6 +406,50 @@ class _HomeScreenState extends State<HomeScreen> {
                         weekendStyle: TextStyle(
                             color: AppColors.primaryColor1,
                             fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: media.width * 0.05,
+                  ),
+                  Center(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SymptomHistory(
+                                userId: _auth.currentUser!.uid),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 40,
+                        width: media.width * 0.8,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: AppColors.primaryG,
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight),
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 2,
+                                offset: Offset(0, 2))
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            "View Symptom History",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: AppColors.whiteColor,
+                              fontFamily: "Poppins",
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),

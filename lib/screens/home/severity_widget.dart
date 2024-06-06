@@ -12,10 +12,10 @@ class SeverityWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _buildSeverityOption(
-            'None', Icons.sentiment_very_dissatisfied, Colors.red),
+            'Severe', Icons.sentiment_very_dissatisfied, Colors.red),
         _buildSeverityOption(
-            'Mild', Icons.sentiment_dissatisfied, Colors.orange),
-        _buildSeverityOption('Moderate', Icons.sentiment_neutral, Colors.blue),
+            'Moderate', Icons.sentiment_dissatisfied, Colors.orange),
+        _buildSeverityOption('Mild', Icons.sentiment_neutral, Colors.blue),
         _buildSeverityOption('Good', Icons.sentiment_satisfied, Colors.green),
       ],
     );

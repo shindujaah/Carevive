@@ -4,10 +4,11 @@ import 'package:carevive/screens/chatbot/chatbot_screen.dart';
 import 'package:carevive/screens/profile/user_profile.dart';
 import 'package:carevive/screens/reminder/reminder_screen.dart';
 import 'package:carevive/screens/resources_screen/resources_screen.dart';
+import 'package:carevive/screens/home/frontscreen.dart'; // Import the new screen
+import 'package:carevive/screens/journal/journalscreen.dart'; // Import the new screen
+import 'package:carevive/screens/home/home_screen.dart'; // Import the home screen
 import 'package:carevive/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-
-import '../home/home_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   static String routeName = "/DashboardScreen";
@@ -22,10 +23,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int selectTab = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    ReminderScheduler(),
-    ResourcesScreen(),
-    UserProfile(),
+    FrontScreen(), // Home front screen
+    HomeScreen(), // Symptoms home screen
+    ReminderScheduler(), // Reminder screen
+    ResourcesScreen(), // Resources screen
+    JournalScreen(), // Journal screen
+    UserProfile(), // User profile screen
   ];
 
   @override
@@ -79,8 +82,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TabButton(
-                  icon: "assets/icons/home.png",
-                  selectIcon: "assets/icons/home.png",
+                  icon: "assets/icons/home.png", // Home front icon
+                  selectIcon: "assets/icons/home.png", // Home front icon
                   isActive: selectTab == 0,
                   onTap: () {
                     if (mounted) {
@@ -90,8 +93,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     }
                   }),
               TabButton(
-                  icon: "assets/icons/reminder.png",
-                  selectIcon: "assets/icons/reminder.png",
+                  icon: "assets/icons/symptoms.png", // Symptoms home icon
+                  selectIcon: "assets/icons/symptoms.png", // Symptoms home icon
                   isActive: selectTab == 1,
                   onTap: () {
                     if (mounted) {
@@ -100,10 +103,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       });
                     }
                   }),
-              const SizedBox(width: 30),
               TabButton(
-                  icon: "assets/icons/resources.png",
-                  selectIcon: "assets/icons/resources.png",
+                  icon: "assets/icons/reminder.png", // Reminder icon
+                  selectIcon: "assets/icons/reminder.png", // Reminder icon
                   isActive: selectTab == 2,
                   onTap: () {
                     if (mounted) {
@@ -112,14 +114,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       });
                     }
                   }),
+              const SizedBox(width: 30),
               TabButton(
-                  icon: "assets/icons/user_icon.png",
-                  selectIcon: "assets/icons/user_select_icon.png",
+                  icon: "assets/icons/resources.png", // Resources icon
+                  selectIcon: "assets/icons/resources.png", // Resources icon
                   isActive: selectTab == 3,
                   onTap: () {
                     if (mounted) {
                       setState(() {
                         selectTab = 3;
+                      });
+                    }
+                  }),
+              TabButton(
+                  icon: "assets/icons/journal.png", // Journal icon
+                  selectIcon: "assets/icons/journal.png", // Journal icon
+                  isActive: selectTab == 4,
+                  onTap: () {
+                    if (mounted) {
+                      setState(() {
+                        selectTab = 4;
+                      });
+                    }
+                  }),
+              TabButton(
+                  icon: "assets/icons/user_icon.png", // User profile icon
+                  selectIcon: "assets/icons/user_select_icon.png", // User profile icon
+                  isActive: selectTab == 5,
+                  onTap: () {
+                    if (mounted) {
+                      setState(() {
+                        selectTab = 5;
                       });
                     }
                   }),

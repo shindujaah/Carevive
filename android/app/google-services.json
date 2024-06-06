@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "75768296549",
+    "project_id": "carevive-7f9a0",
+    "storage_bucket": "carevive-7f9a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75768296549:android:00ad765c8421a60fb5828c",
+        "android_client_info": {
+          "package_name": "com.example.carevive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcc7UIAPDe0Wt7RsiUx_KUsdQ7pJ2MEX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carevive/screens/chatbot/chatbot_screen.dart';
-import 'package:carevive/screens/profile/user_profile.dart';
-import 'package:carevive/screens/reminder/reminder_screen.dart';
-import 'package:carevive/screens/resources_screen/resources_screen.dart';
-import 'package:carevive/screens/journal/journalscreen.dart';
-import 'package:carevive/screens/home/home_screen.dart';
+import 'package:carevive/screens/dashboard/dashboard_screen.dart'; // Import the DashboardScreen
 
 class FrontScreen extends StatelessWidget {
   @override
@@ -23,12 +18,11 @@ class FrontScreen extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Text(
-            'CareVive: Your Post-Chemo Companion',
+            'Support for Cancer Patients',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.purple,
-              fontStyle: FontStyle.italic,
+              color: Colors.black,
             ),
           ),
           SizedBox(height: 20),
@@ -41,15 +35,17 @@ class FrontScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   margin: EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    title: Text('My Cancer Support',
+                    title: Text('My Symptoms',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500)),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomeScreen(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DashboardScreen(initialTab: 1),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -58,15 +54,17 @@ class FrontScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   margin: EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    title: Text('My Medication',
+                    title: Text('My Reminders',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500)),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ReminderScheduler(), // Corrected name
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DashboardScreen(initialTab: 2),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -75,15 +73,17 @@ class FrontScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   margin: EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    title: Text('My Appointments',
+                    title: Text('AI Chatbot',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500)),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChatbotScreen(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DashboardScreen(initialTab: 6),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -92,15 +92,17 @@ class FrontScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   margin: EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    title: Text('My Contacts',
+                    title: Text('Cancer Resources',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500)),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => JournalScreen(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DashboardScreen(initialTab: 3),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -109,15 +111,17 @@ class FrontScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   margin: EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    title: Text('My Personal Information',
+                    title: Text('My Journal',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500)),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UserProfile(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DashboardScreen(initialTab: 4),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -126,31 +130,21 @@ class FrontScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   margin: EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    title: Text('Resources',
+                    title: Text('My Profile',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500)),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ResourcesScreen(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DashboardScreen(initialTab: 5),
+                        ),
+                      );
                     },
                   ),
                 ),
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'CareVive @Cancer Care and Support Platform',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w300,
-                fontSize: 14,
-              ),
-              textAlign: TextAlign.center,
             ),
           ),
         ],

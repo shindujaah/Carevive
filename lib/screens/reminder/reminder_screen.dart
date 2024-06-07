@@ -45,11 +45,12 @@ class _ReminderSchedulerState extends State<ReminderScheduler> {
           automaticallyImplyLeading: false,
           backgroundColor: AppColors.whiteColor,
           elevation: 0,
+          centerTitle: true, // Center the title
           title: const Text(
-            "Schedule Reminders",
+            "Schedule Reminder",
             style: TextStyle(
                 color: AppColors.blackColor,
-                fontSize: 20,
+                fontSize: 16, // Adjust the font size
                 fontWeight: FontWeight.w700),
           ),
         ),
@@ -81,56 +82,62 @@ class _ReminderSchedulerState extends State<ReminderScheduler> {
             ),
           ),
         ),
-        body: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('users')
-                .doc(user!.uid)
-                .collection('reminder')
-                .snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(Color(0xff4FA8C5)),
-                  ),
-                );
-              }
-              if (snapshot.data!.docs.isEmpty) {
-                return Center(child: Text("Nothing to show"));
-              }
-              final data = snapshot.data;
-              return ListView.builder(
-                  itemCount: data?.docs.length,
-                  itemBuilder: (context, index) {
-                    Timestamp t = data?.docs[index].get('time');
-                    String type = data?.docs[index].get('type');
-                    String desc = data?.docs[index].get('desc');
-                    int Rid = data?.docs[index].get('Rid');
-                    DateTime dateTime = t.toDate();
-                    final DateFormat dateFormatter =
-                        DateFormat('yyyy-MM-dd : hh:mm');
-                    String dt = dateFormatter.format(dateTime);
-                    DateTime date = DateTime.fromMicrosecondsSinceEpoch(
-                        t.microsecondsSinceEpoch);
-
-                    String formattedTime = DateFormat.jm().format(date);
-                    on = data!.docs[index].get('onOff');
-                    if (on) {
-                      NotificationLogic.showNotification(
-                        dateTime: date,
-                        id: Rid,
-                        title: type,
-                        body: desc,
+        body: Column(
+          children: [
+            SizedBox(height: 10),
+            Image.asset('assets/icons/reminder_header.png'), // Corrected path to the reminder header image
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(user!.uid)
+                      .collection('reminder')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Color(0xff4FA8C5)),
+                        ),
                       );
                     }
-                    return SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Padding(
+                    if (snapshot.data!.docs.isEmpty) {
+                      return Center(child: Text("Nothing to show"));
+                    }
+                    final data = snapshot.data;
+                    return ListView.builder(
+                        itemCount: data?.docs.length,
+                        itemBuilder: (context, index) {
+                          Timestamp t = data?.docs[index].get('time');
+                          String type = data?.docs[index].get('type');
+                          String desc = data?.docs[index].get('desc');
+                          int Rid = data?.docs[index].get('Rid');
+                          DateTime dateTime = t.toDate();
+                          final DateFormat dateFormatter =
+                              DateFormat('yyyy-MM-dd : hh:mm');
+                          String dt = dateFormatter.format(dateTime);
+                          DateTime date = DateTime.fromMicrosecondsSinceEpoch(
+                              t.microsecondsSinceEpoch);
+
+                          String formattedTime = DateFormat.jm().format(date);
+                          on = data!.docs[index].get('onOff');
+                          if (on) {
+                            NotificationLogic.showNotification(
+                              dateTime: date,
+                              id: Rid,
+                              title: type,
+                              body: desc,
+                            );
+                          }
+                          return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Card(
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                               child: ListTile(
                                 title: Text(
                                   type,
@@ -178,12 +185,12 @@ class _ReminderSchedulerState extends State<ReminderScheduler> {
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    );
-                  });
-            }),
+                          );
+                        });
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }

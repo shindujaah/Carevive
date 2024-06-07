@@ -12,15 +12,22 @@ import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatefulWidget {
   static String routeName = "/DashboardScreen";
+  final int initialTab;
 
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({Key? key, this.initialTab = 0}) : super(key: key);
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int selectTab = 0;
+  late int selectTab;
+
+  @override
+  void initState() {
+    super.initState();
+    selectTab = widget.initialTab;
+  }
 
   final List<Widget> _widgetOptions = <Widget>[
     FrontScreen(), // Home front screen
@@ -29,6 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     ResourcesScreen(), // Resources screen
     JournalScreen(), // Journal screen
     UserProfile(), // User profile screen
+    ChatbotScreen(), // AI Chatbot screen
   ];
 
   @override
@@ -39,10 +47,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
       floatingActionButton: InkWell(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ChatbotScreen(),
-              ));
+            context,
+            MaterialPageRoute(
+              builder: (context) => DashboardScreen(initialTab: 6),
+            ),
+          );
         },
         child: Container(
           width: 60,

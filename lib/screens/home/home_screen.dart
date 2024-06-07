@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:carevive/screens/home/date_specific_symptoms.dart';
 import 'package:carevive/screens/home/symptom_history.dart';
 import 'package:carevive/screens/home/symptom_input_screen.dart';
@@ -171,126 +170,64 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: media.width * 0.05,
-                  ),
+                  SizedBox(height: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        height: media.height * 0.17,
-                        width: media.width / 2.5,
-                        padding: EdgeInsets.symmetric(horizontal: 25),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color:Color.fromARGB(255, 245, 245, 245),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/icons/blood_icon.png",
-                              height: media.height * 0.05,
-                              color: Color(0xFF9D4C6C),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Blood Group",
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.8),
-                                fontSize: 16,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              blood,
-                              style: TextStyle(
-                                color: AppColors.blackColor,
-                                fontSize: 30,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
+                      Expanded(
+                        flex: 2,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            "assets/icons/PatientDoctor.png", // Updated image
+                            height: media.height * 0.4, // Adjusted height
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                      Container(
-                        height: media.height * 0.17,
-                        width: media.width / 2.5,
-                        padding: EdgeInsets.symmetric(horizontal: 25),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color:Color.fromARGB(255, 245, 245, 245),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
+                      SizedBox(width: 20),
+                      Expanded(
+                        flex: 1,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              "assets/icons/weight_icon.png",
-                              height: media.height * 0.05,
-                              color: Color(0xFF1969A3),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
+                            _buildInfoCard(
+                                media, "Blood Group", blood, "assets/icons/blood_icon.png", Color(0xFF9D4C6C)),
+                            SizedBox(height: 20),
+                            _buildInfoCard(
+                              media,
                               "Weight",
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.8),
-                                fontSize: 16,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            RichText(
-                              text: TextSpan(
-                                text: '$weight', // Weight value
-                                style: TextStyle(
-                                  color: AppColors.blackColor,
-                                  fontSize: 30,
-                                  fontFamily: "Poppins",
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: ' kg', // 'kg' text
-                                    style: TextStyle(
-                                      color: AppColors.blackColor,
-                                      fontSize: 20, // Smaller font size for 'kg'
-                                      fontFamily: "Poppins",
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              '$weight kg',
+                              "assets/icons/weight_icon.png",
+                              Color(0xFF1969A3),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: media.width * 0.05,
+                  SizedBox(height: 20),
+                  Center(
+                    child: Container(
+                      width: 420, // Adjust the width as necessary
+                      height: 2, // Thickness of the divider
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryColor1, // Color of the divider
+                        borderRadius: BorderRadius.circular(2), // Rounded edges
+                      ),
+                    ),
                   ),
+                  SizedBox(height: 10),
+                  Center(
+                    child: Text(
+                      "Log Your Symptoms",
+                      style: TextStyle(
+                        color: AppColors.primaryColor1,
+                        fontSize: 16,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -409,17 +346,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: media.width * 0.05,
-                  ),
+                  SizedBox(height: 20),
                   Center(
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SymptomHistory(
-                                userId: _auth.currentUser!.uid),
+                            builder: (context) =>
+                                SymptomHistory(userId: _auth.currentUser!.uid),
                           ),
                         );
                       },
@@ -443,7 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Text(
                             "View Symptom History",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 14,
                               color: AppColors.whiteColor,
                               fontFamily: "Poppins",
                               fontWeight: FontWeight.w400,
@@ -453,14 +388,64 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: media.width * 0.1,
-                  ),
+                  SizedBox(height: 20),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoCard(Size media, String title, String value, String iconPath,
+      Color iconColor) {
+    return Container(
+      height: media.height * 0.15,
+      width: media.width / 3.5,
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color.fromARGB(255, 245, 245, 245),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            iconPath,
+            height: media.height * 0.04,
+            color: iconColor,
+          ),
+          SizedBox(height: 5),
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 14,
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 5),
+          Text(
+            value,
+            style: TextStyle(
+              color: AppColors.primaryColor1,
+              fontSize: 24,
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }

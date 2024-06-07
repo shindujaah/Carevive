@@ -12,14 +12,26 @@ class ResourcesScreen extends StatefulWidget {
 
 class _ResourcesScreenState extends State<ResourcesScreen> {
   List<Map<String, String>> items = [
-    {'imageUrl': 'assets/icons/nutrition_icon.png', 'title': 'Nutrition'},
+    {
+      'imageUrl': 'assets/icons/nutrition_icon.png',
+      'title': 'Nutrition',
+      'description': 'Information about nutrition and diet plans.'
+    },
     {
       'imageUrl': 'assets/icons/mental_health_icon.png',
-      'title': 'Mental Health'
+      'title': 'Mental Health',
+      'description': 'Tips and resources for mental well-being.'
     },
-    {'imageUrl': 'assets/icons/exercise_icon.png', 'title': 'Exercise'},
-    {'imageUrl': 'assets/icons/general_icon.png', 'title': 'General'},
-    // Add more items here
+    {
+      'imageUrl': 'assets/icons/exercise_icon.png',
+      'title': 'Exercise',
+      'description': 'Guidance on physical activities and exercises.'
+    },
+    {
+      'imageUrl': 'assets/icons/general_icon.png',
+      'title': 'General',
+      'description': 'General health information and resources.'
+    },
   ];
 
   @override
@@ -38,9 +50,10 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
             "Resources",
             style: TextStyle(
                 color: AppColors.blackColor,
-                fontSize: 20,
+                fontSize: 16,
                 fontWeight: FontWeight.w700),
           ),
+          centerTitle: true,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -49,20 +62,19 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GridView.builder(
+                  ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: items.length,
                     padding: EdgeInsets.all(15),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio:
-                          (MediaQuery.of(context).size.height - 50 - 25) /
-                              (4 * 240),
-                      mainAxisSpacing: 15,
-                      crossAxisSpacing: 15,
-                    ),
                     itemBuilder: (context, index) {
+                      Color containerColor = (index == 1 || index == 3)
+                          ? AppColors.primaryColor1
+                          : Colors.white;
+                      Color textColor = (index == 1 || index == 3)
+                          ? Colors.white
+                          : AppColors.primaryColor1;
+
                       return InkWell(
                         onTap: () {
                           if (index == 0) {
@@ -108,11 +120,10 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                           }
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 10),
+                          margin: EdgeInsets.only(bottom: 20),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
+                            color: containerColor,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black12,
@@ -121,25 +132,63 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Image.asset(
-                                  items[index]['imageUrl']!,
-                                  height: media.height * 0.12,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        items[index]['title']!,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: textColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        items[index]['description']!,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: textColor.withOpacity(0.6),
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        'Click more >',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: textColor,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                items[index]['title']!,
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black.withOpacity(0.6),
-                                  fontWeight: FontWeight.w600,
+                                SizedBox(width: 10),
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    height: media.height * 0.15,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Image.asset(
+                                        items[index]['imageUrl']!,
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       );

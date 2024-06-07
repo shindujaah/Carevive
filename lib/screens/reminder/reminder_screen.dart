@@ -143,6 +143,7 @@ class _ReminderSchedulerState extends State<ReminderScheduler> {
                                   type,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryColor1, // Updated to deep purple
                                   ),
                                 ),
                                 subtitle: Column(
@@ -150,11 +151,15 @@ class _ReminderSchedulerState extends State<ReminderScheduler> {
                                   children: [
                                     Text(
                                       desc,
+                                      style: TextStyle(
+                                        color: const Color.fromARGB(255, 0, 0, 0),
+                                      ),
                                     ),
                                     Text(
                                       dt,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
+                                        color: Color.fromARGB(143, 0, 0, 0),
                                       ),
                                     ),
                                   ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carevive/screens/dashboard/dashboard_screen.dart'; // Import the DashboardScreen
+import 'package:carevive/utils/app_colors.dart'; // Import the AppColors
 
 class FrontScreen extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class FrontScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 80),
+          SizedBox(height: 90),
           Center(
             child: Image.asset(
               'assets/icons/logo.png', // Path to your logo
@@ -26,27 +27,27 @@ class FrontScreen extends StatelessWidget {
               fontStyle: FontStyle.italic,
             ),
           ),
-          SizedBox(height: 20),
+          // Removed the SizedBox(height: 10) here
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 50.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildButton(context, 'My Symptoms', DashboardScreen(initialTab: 1)),
-                  SizedBox(height: 5),
+                  SizedBox(height: 4),
                   _buildButton(context, 'My Reminders', DashboardScreen(initialTab: 2)),
-                  SizedBox(height: 5),
+                  SizedBox(height: 4),
                   _buildButton(context, 'AI Chatbot', DashboardScreen(initialTab: 6)),
-                  SizedBox(height: 5),
+                  SizedBox(height: 4),
                   _buildButton(context, 'Cancer Resources', DashboardScreen(initialTab: 3)),
-                  SizedBox(height: 5),
+                  SizedBox(height: 4),
                   _buildButton(context, 'My Journal', DashboardScreen(initialTab: 4)),
-                  SizedBox(height: 5),
+                  SizedBox(height: 4),
                   _buildButton(context, 'My Profile', DashboardScreen(initialTab: 5)),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   Text(
-                    'CareVive @Cancer Care and Support Platform',
+                    'CareVive @Cancer Care and Support Platform\nDeveloped by Shindujaah',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w300,
@@ -65,11 +66,11 @@ class FrontScreen extends StatelessWidget {
 
   Widget _buildButton(BuildContext context, String text, Widget screen) {
     return SizedBox(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width * 0.8, // Adjusted width
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 12), // Adjusted padding
-          backgroundColor: Colors.deepPurple, // Button color
+          backgroundColor: Color.fromARGB(255, 83, 45, 151), // New button color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),

@@ -8,146 +8,87 @@ class FrontScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 40),
+          SizedBox(height: 80),
           Center(
             child: Image.asset(
               'assets/icons/logo.png', // Path to your logo
-              width: 200,
-              height: 200,
+              width: 150, // Adjusted size
+              height: 150, // Adjusted size
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           Text(
-            'Support for Cancer Patients',
+            'CareVive: Your Post-Chemo Companion',
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 16, // Smaller font size
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: Colors.deepPurple,
+              fontStyle: FontStyle.italic,
             ),
           ),
           SizedBox(height: 20),
           Expanded(
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              children: [
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    title: Text('My Symptoms',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardScreen(initialTab: 1),
-                        ),
-                      );
-                    },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildButton(context, 'My Symptoms', DashboardScreen(initialTab: 1)),
+                  SizedBox(height: 5),
+                  _buildButton(context, 'My Reminders', DashboardScreen(initialTab: 2)),
+                  SizedBox(height: 5),
+                  _buildButton(context, 'AI Chatbot', DashboardScreen(initialTab: 6)),
+                  SizedBox(height: 5),
+                  _buildButton(context, 'Cancer Resources', DashboardScreen(initialTab: 3)),
+                  SizedBox(height: 5),
+                  _buildButton(context, 'My Journal', DashboardScreen(initialTab: 4)),
+                  SizedBox(height: 5),
+                  _buildButton(context, 'My Profile', DashboardScreen(initialTab: 5)),
+                  SizedBox(height: 20),
+                  Text(
+                    'CareVive @Cancer Care and Support Platform',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    title: Text('My Reminders',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardScreen(initialTab: 2),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    title: Text('AI Chatbot',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardScreen(initialTab: 6),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    title: Text('Cancer Resources',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardScreen(initialTab: 3),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    title: Text('My Journal',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardScreen(initialTab: 4),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    title: Text('My Profile',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.purple),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardScreen(initialTab: 5),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildButton(BuildContext context, String text, Widget screen) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 12), // Adjusted padding
+          backgroundColor: Colors.deepPurple, // Button color
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          elevation: 2,
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => screen),
+          );
+        },
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
     );
   }

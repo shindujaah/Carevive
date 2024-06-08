@@ -206,8 +206,9 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
         title: Text(
           'Chatbot',
           style: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
+              color: Colors.black, fontSize: 16, fontWeight: FontWeight.w700),
         ),
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -264,8 +265,8 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                                       vertical: 10, horizontal: 15),
                                   decoration: BoxDecoration(
                                     color: message.containsKey('user')
-                                        ? Colors.blue[100]
-                                        : Colors.green[100],
+                                        ? Colors.grey[300]
+                                        : AppColors.primaryColor1,
                                     borderRadius: message.containsKey('user')
                                         ? BorderRadius.only(
                                             topLeft: Radius.circular(15.0),
@@ -278,7 +279,14 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                                             bottomRight: Radius.circular(15.0),
                                           ),
                                   ),
-                                  child: Text(message.values.first),
+                                  child: Text(
+                                    message.values.first,
+                                    style: TextStyle(
+                                      color: message.containsKey('user')
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
+                                  ),
                                 ),
                         ),
                       );

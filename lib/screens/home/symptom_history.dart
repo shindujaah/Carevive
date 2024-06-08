@@ -1,4 +1,4 @@
-import 'package:carevive/screens/dashboard/dashboard_screen.dart';
+import 'package:carevive/screens/home/home_screen.dart'; // Import the HomeScreen
 import 'package:carevive/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,20 +24,18 @@ class SymptomHistory extends StatelessWidget {
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DashboardScreen(),
-                ));
+            Navigator.pop(context); // Use pop to go back
           },
-          child: Icon(Icons.arrow_back),
+          child: Icon(Icons.arrow_back, color: AppColors.blackColor),
         ),
+        backgroundColor: AppColors.whiteColor,
+        elevation: 0,
+        centerTitle: true,
         title: Text(
           'Symptom History',
           style: TextStyle(
             color: AppColors.blackColor,
-            fontSize: 20,
-            fontFamily: "Poppins",
+            fontSize: 16, // Adjusted font size
             fontWeight: FontWeight.w700,
           ),
         ),

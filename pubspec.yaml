@@ -52,6 +52,9 @@ dependencies:
   loading_animation_widget: ^1.2.1
   file_picker: ^8.0.3
   firebase_storage: ^11.7.6
+  flutter_bloc: ^7.0.0
+  equatable: ^2.0.3
+  cached_network_image: ^3.0.0
 
 
 dev_dependencies:

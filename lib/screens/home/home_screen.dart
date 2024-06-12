@@ -170,7 +170,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
@@ -184,7 +183,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 20),
                       Expanded(
                         flex: 1,
                         child: Column(
@@ -203,17 +201,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(height: 20),
-                  Center(
-                    child: Container(
-                      width: 420, // Adjust the width as necessary
-                      height: 2, // Thickness of the divider
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor1, // Color of the divider
-                        borderRadius: BorderRadius.circular(2), // Rounded edges
-                      ),
-                    ),
                   ),
                   SizedBox(height: 10),
                   Center(

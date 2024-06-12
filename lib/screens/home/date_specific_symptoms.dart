@@ -1,4 +1,5 @@
 import 'package:carevive/screens/dashboard/dashboard_screen.dart';
+import 'package:carevive/screens/home/home_screen.dart'; // Import the home screen
 import 'package:carevive/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,7 +32,7 @@ class _DateSpecificSymptomsState extends State<DateSpecificSymptoms> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DashboardScreen(),
+            builder: (context) => DashboardScreen(initialTab: 1),
           ));
     });
   }

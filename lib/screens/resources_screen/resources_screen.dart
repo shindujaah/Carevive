@@ -15,22 +15,38 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
     {
       'imageUrl': 'assets/icons/nutrition_icon.png',
       'title': 'Nutrition',
-      'description': 'Information about nutrition and diet plans.'
+      'description': 'Information about nutrition and diet plans.',
+      'category': 'nutrition'
     },
     {
       'imageUrl': 'assets/icons/mental_health_icon.png',
       'title': 'Mental Health',
-      'description': 'Tips and resources for mental well-being.'
+      'description': 'Tips and resources for mental well-being.',
+      'category': 'mental_health'
     },
     {
       'imageUrl': 'assets/icons/exercise_icon.png',
       'title': 'Exercise',
-      'description': 'Guidance on physical activities and exercises.'
+      'description': 'Guidance on physical activities and exercises.',
+      'category': 'exercise'
     },
     {
       'imageUrl': 'assets/icons/general_icon.png',
       'title': 'General',
-      'description': 'General health information and resources.'
+      'description': 'General health information and resources.',
+      'category': 'general'
+    },
+    {
+      'imageUrl': 'assets/icons/cancer_hand.png',
+      'title': 'Cancer',
+      'description': 'Latest news and resources about cancer.',
+      'category': 'cancer'
+    },
+    {
+      'imageUrl': 'assets/icons/healthcare_icon.png',
+      'title': 'Healthcare',
+      'description': 'Latest news and resources about healthcare.',
+      'category': 'healthcare'
     },
   ];
 
@@ -38,8 +54,8 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
 
-    return PopScope(
-      canPop: false,
+    return WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
         backgroundColor: AppColors.whiteColor,
         appBar: AppBar(
@@ -68,52 +84,32 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                     itemCount: items.length,
                     padding: EdgeInsets.all(15),
                     itemBuilder: (context, index) {
-                      Color containerColor = (index == 1 || index == 3)
+                      Color containerColor = (index % 2 == 1)
                           ? AppColors.primaryColor1
                           : Colors.white;
-                      Color textColor = (index == 1 || index == 3)
+                      Color textColor = (index % 2 == 1)
                           ? Colors.white
                           : AppColors.primaryColor1;
 
                       return InkWell(
                         onTap: () {
-                          if (index == 0) {
+                          if (index <= 3) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ResourceScreen(
-                                  title: 'Nutrition Resources',
-                                  resources: nutritionResources,
+                                  title: '${items[index]['title']} Resources',
+                                  category: items[index]['category']!,
                                 ),
                               ),
                             );
-                          } else if (index == 1) {
+                          } else {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ResourceScreen(
-                                  title: 'Mental Health Resources',
-                                  resources: mentalHealthResources,
-                                ),
-                              ),
-                            );
-                          } else if (index == 2) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ResourceScreen(
-                                  title: 'Exercise Resources',
-                                  resources: exerciseResources,
-                                ),
-                              ),
-                            );
-                          } else if (index == 3) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ResourceScreen(
-                                  title: 'General Information Resources',
-                                  resources: generalInfoResources,
+                                  title: '${items[index]['title']} Resources',
+                                  category: items[index]['category']!,
                                 ),
                               ),
                             );
